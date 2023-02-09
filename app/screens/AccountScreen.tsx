@@ -54,8 +54,10 @@ export const AccountScreen: FC<StackScreenProps<AppStackScreenProps, "Account">>
         />
         <Box h="100%" bg={colors.palette.primary100} justifyContent="center">
           <VStack w="100%" alignItems="center" space={5}>
-            <Image w={20} h={20} source={{ uri: authStore.userInfo.picture }} mb="5" />
-            <Text fontSize="lg">{authStore.userInfo.name}</Text>
+            {authStore.userInfo && (
+              <Image w={20} h={20} source={{ uri: authStore.userInfo.picture }} mb="5" />
+            )}
+            <Text fontSize="lg">{authStore.userInfo?.name || authStore.loginForm.email}</Text>
             <Button
               mt="2"
               py="4"
