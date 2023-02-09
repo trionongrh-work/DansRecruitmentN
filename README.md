@@ -2,8 +2,9 @@
 
 ## Specification
 
-- This project based on Ignite boilerplate from [here](https://github.com/infinitered/ignite)
+- node.js v16.18.1
 - Expo based project
+- This project based on Ignite boilerplate from [here](https://github.com/infinitered/ignite)
 
 ## Quick Start
 
