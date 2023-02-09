@@ -3,7 +3,7 @@
   "displayName": "DansRecruitmentN",
   "expo": {
     "name": "DansRecruitmentN",
-    "slug": "DansRecruitmentN",
+    "slug": "dansrecruitmentn",
     "scheme": "dansrecruitmentn",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,7 +17,9 @@
       "fallbackToCacheTimeout": 0
     },
     "jsEngine": "hermes",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
       "icon": "./assets/images/app-icon-android-legacy.png",
       "package": "com.dansrecruitmentn",
@@ -33,6 +35,12 @@
     },
     "plugins": [
       "@react-native-google-signin/google-signin"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "75f62ac9-602f-4952-a1c6-73f66df1b2fe"
+      }
+    },
+    "owner": "trionongrh"
   }
 }

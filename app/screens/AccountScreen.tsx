@@ -5,7 +5,18 @@ import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../navigators"
 import { Screen } from "../components"
 import { AppBar } from "../components/AppBar"
-import { Box, HStack, Icon, IconButton, Input, VStack, Text, Center, Button } from "native-base"
+import {
+  Box,
+  HStack,
+  Icon,
+  IconButton,
+  Input,
+  VStack,
+  Text,
+  Center,
+  Button,
+  Image,
+} from "native-base"
 import { colors } from "../theme"
 import { MaterialIcons } from "@expo/vector-icons"
 import { useStores } from "../models"
@@ -42,8 +53,9 @@ export const AccountScreen: FC<StackScreenProps<AppStackScreenProps, "Account">>
           }
         />
         <Box h="100%" bg={colors.palette.primary100} justifyContent="center">
-          <VStack w="100%" alignItems="center">
-            <Text>{authStore.loginForm.email}</Text>
+          <VStack w="100%" alignItems="center" space={5}>
+            <Image w={20} h={20} source={{ uri: authStore.userInfo.picture }} mb="5" />
+            <Text fontSize="lg">{authStore.userInfo.name}</Text>
             <Button
               mt="2"
               py="4"

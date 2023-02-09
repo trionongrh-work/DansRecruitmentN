@@ -21,8 +21,10 @@ import {
   Pressable,
   Icon,
 } from "native-base"
-import { MaterialIcons } from "@expo/vector-icons"
+import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 import { useStores } from "../models"
+import * as Google from "expo-auth-session/providers/google"
+
 // import {
 //   GoogleSignin,
 //   GoogleSigninButton,
@@ -46,6 +48,9 @@ export const LoginScreen: FC<StackScreenProps<AppStackScreenProps, "Login">> = o
     const { authStore } = useStores()
     const { loginForm } = authStore
 
+    const [request, response, promptAsync] = Google.useAuthRequest({
+      expoClientId: "154865436185-3gpoiqsobuhumb2f0q0jfarfqjuf4743.apps.googleusercontent.com",
+    })
     const [show, setShow] = useState(false)
     // Pull in navigation via hook
     // const navigation = useNavigation()
@@ -56,6 +61,12 @@ export const LoginScreen: FC<StackScreenProps<AppStackScreenProps, "Login">> = o
       loginForm.setEmail("test@mail.com")
       loginForm.setPassword("P@$$w0rd")
     }, [])
+
+    useEffect(() => {
+      if (response?.type === "success") {
+        authStore.onLoginGoogle(response)
+      }
+    }, [response])
 
     return (
       <Screen style={$root} preset="fixed">
@@ -113,7 +124,19 @@ export const LoginScreen: FC<StackScreenProps<AppStackScreenProps, "Login">> = o
                   >
                     Login
                   </Button>
-                  {/* <GoogleSigninButton /> */}
+                  <Button
+                    mt="2"
+                    py="4"
+                    bg={colors.palette.primary800}
+                    _pressed={{ bg: colors.palette.primary300 }}
+                    variant="solid"
+                    onPress={() => {
+                      promptAsync()
+                    }}
+                    leftIcon={<Icon name="logo-google" as={Ionicons} />}
+                  >
+                    Google Login
+                  </Button>
                 </VStack>
               </Box>
             </Box>

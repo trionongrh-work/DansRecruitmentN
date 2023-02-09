@@ -5,6 +5,10 @@ import { isEmail } from "validator"
 import { Toast } from "native-base"
 import { Keyboard } from "react-native"
 import { navigate } from "../navigators"
+import * as Google from "expo-auth-session/providers/google"
+import { AuthSessionResult } from "expo-auth-session"
+import { ApiGoogle } from "../services/api/api.google"
+import { l } from "i18n-js"
 
 /**
  * Model description here for TypeScript hints.
@@ -14,6 +18,8 @@ export const AuthStoreModel = types
   .props({
     loginForm: createLoginFormDefaultModel(),
     isAuthenticated: types.optional(types.boolean, false),
+    accessToken: types.maybeNull(types.string),
+    userInfo: types.frozen<any>(),
   })
   .actions(withSetPropAction)
   .views((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -21,8 +27,9 @@ export const AuthStoreModel = types
     /**
      * State onLoginSuccess
      */
-    onLoginSuccess: () => {
+    onLoginSuccess: (userInfo?) => {
       // set isAuthenticated to true for auth session
+      if (userInfo) self.setProp("userInfo", userInfo)
       self.isAuthenticated = true
       Toast.show({
         title: "Login success !",
@@ -75,10 +82,22 @@ export const AuthStoreModel = types
       }
     },
 
+    onLoginGoogle: async (authResult) => {
+      self.setProp("accessToken", authResult.authentication.accessToken)
+      const api = new ApiGoogle({ accessToken: self.accessToken })
+
+      const result = await api.getInfo()
+      if (result.kind === "ok") {
+        console.log(result.data)
+        self.onLoginSuccess(result.data)
+      }
+    },
+
     onLogout: () => {
       // clear auth
       // Advancement you can remove token in here
       self.isAuthenticated = false
+      self.setProp("userInfo", null)
     },
   })) // eslint-disable-line @typescript-eslint/no-unused-vars
 

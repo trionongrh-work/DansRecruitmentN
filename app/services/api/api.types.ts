@@ -48,3 +48,7 @@ export interface ApiConfig {
    */
   timeout: number
 }
+
+export interface ApiConfigGoogle {
+  accessToken: string
+}
