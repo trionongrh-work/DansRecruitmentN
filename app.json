@@ -1,0 +1,38 @@
+{
+  "name": "DansRecruitmentN",
+  "displayName": "DansRecruitmentN",
+  "expo": {
+    "name": "DansRecruitmentN",
+    "slug": "DansRecruitmentN",
+    "scheme": "dansrecruitmentn",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/app-icon-all.png",
+    "splash": {
+      "image": "./assets/images/splash-logo-dans.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#171656"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "jsEngine": "hermes",
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "icon": "./assets/images/app-icon-android-legacy.png",
+      "package": "com.dansrecruitmentn",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
+        "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
+      },
+      "splash": {
+        "image": "./assets/images/splash-logo-dans-android.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#171656"
+      }
+    },
+    "plugins": [
+      "@react-native-google-signin/google-signin"
+    ]
+  }
+}
